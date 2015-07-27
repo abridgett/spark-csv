@@ -33,6 +33,9 @@ object TypeCast {
    * @param castType SparkSQL type
    */
   private[csv] def castTo(datum: String, castType: DataType): Any = {
+    if (datum == "") {
+      null
+    } else {
     castType match {
       case _: ByteType => datum.toByte
       case _: ShortType => datum.toShort
@@ -48,6 +51,7 @@ object TypeCast {
       case _: DateType => Date.valueOf(datum)
       case _: StringType => datum
       case _ => throw new RuntimeException(s"Unsupported type: ${castType.typeName}")
+    }
     }
   }
 
