@@ -1,6 +1,6 @@
 name := "spark-csv"
 
-version := "1.1.0"
+version := "1.1.0os2"
 
 organization := "com.databricks"
 
@@ -29,12 +29,14 @@ spAppendScalaVersion := true
 spIncludeMaven := true
 
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (version.value.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  Some(Resolver.file("file", new File(""+Path.userHome.absolutePath+"/.m2/repository")))
+//  val nexus = "https://oss.sonatype.org/"
+//  if (version.value.endsWith("SNAPSHOT"))
+//    Some("snapshots" at nexus + "content/repositories/snapshots")
+//  else
+//    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
+
 
 pomExtra := (
   <url>https://github.com/databricks/spark-csv</url>
